@@ -46,10 +46,11 @@ class DataEcoEnvHandler:
         return self.data_handler.get(feat_name)
 
     def getIndexName(self, index):
-        if index not in self.data_index.keys():
+        try:
+            return self.data_index.get(index)
+        except KeyError:
             print "wrong feature index"
             return 'null'
-        return self.data_index.get(index)
 
 
 # eco_info data handler
@@ -83,10 +84,11 @@ class DataEcoInfoHandler:
         return self.data_handler.get(feat_name)
 
     def getIndexName(self, index):
-        if index not in self.data_index.keys():
+        try:
+            return self.data_index.get(index)
+        except KeyError:
             print "wrong feature index"
             return 'null'
-        return self.data_index.get(index)
 
 
 # order info data handler
@@ -158,10 +160,11 @@ class DataOrderInfoHandler:
         return self.data_handler.get(feat_name)
 
     def getIndexName(self, index):
-        if index not in self.data_index.keys():
+        try:
+            return self.data_index.get(index)
+        except KeyError:
             print "wrong feature index"
             return 'null'
-        return self.data_index.get(index)
 
 
 # rst info data handler
@@ -178,26 +181,28 @@ class DataRstInfoHandler:
             'is_premium': 7,
             'address_type': 8,
             'good_rating_rate': 9,
-            'has_image': 10,
-            'has_food_img': 11,
-            'min_deliver_amount': 12,
-            'time_ensure_spent': 13,
-            'is_time_ensure':14,
-            'is_ka': 15,
+            'open_month_num': 10,
+            'has_image': 11,
+            'has_food_img': 12,
+            'min_deliver_amount': 13,
+            'time_ensure_spent': 14,
+            'is_time_ensure':15,
+            'is_ka': 16,
             'is_time_ensure_discount': 16,
-            'is_eleme_deliver': 17,
-            'bu_flag': 18,
-            'brand_name': 19,
-            'service_rating': 20,
-            'invoice': 21,
-            'online_payment': 22,
-            'public_degree': 23,
-            'food_num': 24,
-            'food_image_num': 25,
-            'is_promotion_info': 26,
-            'is_bookable': 27
+            'is_eleme_deliver': 18,
+            'radius': 19,
+            'bu_flag': 20,
+            'brand_name': 21,
+            'service_rating': 22,
+            'invoice': 23,
+            'online_payment': 24,
+            'public_degree': 25,
+            'food_num': 26,
+            'food_image_num': 27,
+            'is_promotion_info': 28,
+            'is_bookable': 29
         }
-        self.data_handler = {
+        self.data_index = {
             '0': 'restaurant_id',
             '1': 'primary_category',
             '2': 'food_name_list',
@@ -208,24 +213,26 @@ class DataRstInfoHandler:
             '7': 'is_premium',
             '8': 'address_type',
             '9': 'good_rating_rate',
-            '10': 'has_image',
-            '11': 'has_food_img',
-            '12': 'min_deliver_amount',
-            '13': 'time_ensure_spent',
-            '14': 'is_time_ensure',
-            '15': 'is_ka',
-            '16': 'is_time_ensure_discount',
-            '17': 'is_eleme_deliver',
-            '18': 'bu_flag',
-            '19': 'brand_name',
-            '20': 'service_rating',
-            '21': 'invoice',
-            '22': 'online_payment',
-            '23': 'public_degree',
-            '24': 'food_num',
-            '25': 'food_image_num',
-            '26': 'is_promotion_info',
-            '27': 'is_bookable'
+            '10': 'open_month_num',
+            '11': 'has_image',
+            '12': 'has_food_img',
+            '13': 'min_deliver_amount',
+            '14': 'time_ensure_spent',
+            '15': 'is_time_ensure',
+            '16': 'is_ka',
+            '17': 'is_time_ensure_discount',
+            '18': 'is_eleme_deliver',
+            '19': 'radius',
+            '20': 'bu_flag',
+            '21': 'brand_name',
+            '22': 'service_rating',
+            '23': 'invoice',
+            '24': 'online_payment',
+            '25': 'public_degree',
+            '26': 'food_num',
+            '27': 'food_image_num',
+            '28': 'is_promotion_info',
+            '29': 'is_bookable'
         }
 
     def getNameIndex(self, feat_name):
@@ -235,8 +242,9 @@ class DataRstInfoHandler:
         return self.data_handler.get(feat_name)
 
     def getIndexName(self, index):
-        if index not in self.data_index.keys():
+        try:
+            return self.data_index.get(index)
+        except KeyError:
             print "wrong feature index"
             return 'null'
-        return self.data_index.get(index)
 ############################# define data structure #############################

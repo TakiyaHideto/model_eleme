@@ -3,6 +3,7 @@ import os
 from hackthon_eleme_data_structure import *
 from hackthon_eleme_data_loading import *
 from hackthon_eleme_data_joining import *
+from hackthon_eleme_feature_engineering import *
 # import xgboost as xgb
 
 
@@ -38,16 +39,18 @@ if __name__ == '__main__':
     file_nxt_eco_env_path = '/Users/hideto/Downloads/E_data/next_eco_env.txt'
     file_nxt_eco_info_path = '/Users/hideto/Downloads/E_data/next_eco_info.txt'
     output_file = '/Users/hideto/Desktop/output.txt'
+    feat_map_file = '/Users/hideto/Desktop/feat_map_file.txt'
     train_file_path = '/Users/hideto/Desktop/e_data.txt.train'
     test_file_path = '/Users/hideto/Desktop/e_data.txt.test'
-    job = DataJoining(file_his_eco_info_path,
-                      file_his_eco_env_path,
+    job = DataJoining(file_his_eco_env_path,
+                      file_his_eco_info_path,
                       file_order_info_path,
                       file_rst_info_path,
                       file_nxt_eco_env_path,
                       file_nxt_eco_info_path,
                       output_file)
 
-    job.joinData()
+    data_block = job.joinData()
+    oneHot(data_block, output_file, feat_map_file)
     splitData(output_file, train_file_path, test_file_path)
     # trainTest()
