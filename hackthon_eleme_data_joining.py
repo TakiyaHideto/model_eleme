@@ -49,12 +49,16 @@ class DataJoining:
                 # join data
                 is_click = data_his_eco_info_arr[self.DataLoadingClass.data_eco_info_handler.getNameIndex('is_click')].split(":")[1]
                 is_buy = data_his_eco_info_arr[self.DataLoadingClass.data_eco_info_handler.getNameIndex('is_buy')]
-                data_str = is_click + '\t' +\
+                if order_id != '"NULL"':
+                    data_str = is_click + '\t' +\
                            '\t'.join(data_his_eco_info_arr) + '\t' + \
                            '\t'.join(data_his_eco_env_arr) + '\t' + \
                            '\t'.join(data_order_info_arr) + '\t' + \
                            '\t'.join(data_rst_info_arr)
-                data_block.append(data_str)
-                # fo.write("{0}\n".format(data_str))
-        return data_block
+                else:
+                    data_str = is_click + '\t' + \
+                               '\t'.join(data_his_eco_info_arr) + '\t' + \
+                               '\t'.join(data_his_eco_env_arr) + '\t' + \
+                               '\t'.join(data_rst_info_arr)
+                fo.write("{0}\n".format(data_str))
         self.DataLoadingClass.__del__()

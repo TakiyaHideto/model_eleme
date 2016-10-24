@@ -4,7 +4,7 @@
 import os
 
 ################### feat eng: one hot ###################
-def oneHot(data_block, output_file, feat_map_file):
+def oneHot(input_file, output_file, feat_map_file):
     feat_map = {}
     feat_index = 1
     if os.path.exists(feat_map_file):
@@ -15,19 +15,24 @@ def oneHot(data_block, output_file, feat_map_file):
                 feat_index = max(int(elements[1]), feat_index)
 
     with open(output_file, 'w') as fo:
-        for data in data_block:
-            records = []
-            elements = data.rstrip().split('\t')
-            label = elements[0]
-            for i in range(1, len(elements)):
-                feat_name = "{0}_{1}".format(elements[i].split(":")[0],
-                                             elements[i].split(":")[1])
-                if feat_name not in feat_map.keys():
-                    feat_map[feat_name] = str(feat_index)
-                    feat_index += 1
-                records.append("{0}:1".format(feat_index))
-            fo.write("{0}\t{1}\n".format(label,
-                                         '\t'.join(records)))
+        with open(input_file, 'r') as fi:
+            for data in fi:
+                records = []
+                elements = data.rstrip().split('\t')
+                label = elements[0]
+                for i in range(1, len(elements)):
+                    try:
+                        feat_name = "{0}_{1}".format(elements[i].split(":")[0],
+                                                     elements[i].split(":")[1])
+                        if feat_name not in feat_map.keys():
+                            feat_map[feat_name] = str(feat_index)
+                            feat_index += 1
+                        records.append("{0}:1".format(feat_map[feat_name]))
+                    except IndexError:
+                        print i
+                        print elements[i]
+                        continue
+                fo.write("{0}\t{1}\n".format(label, '\t'.join(records)))
     outputFeatMap(feat_map, feat_map_file)
 
 

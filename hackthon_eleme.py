@@ -39,6 +39,7 @@ if __name__ == '__main__':
     file_nxt_eco_env_path = '/Users/hideto/Downloads/E_data/next_eco_env.txt'
     file_nxt_eco_info_path = '/Users/hideto/Downloads/E_data/next_eco_info.txt'
     output_file = '/Users/hideto/Desktop/output.txt'
+    output_file_feat_eng = '/Users/hideto/Desktop/output_feat_eng.txt'
     feat_map_file = '/Users/hideto/Desktop/feat_map_file.txt'
     train_file_path = '/Users/hideto/Desktop/e_data.txt.train'
     test_file_path = '/Users/hideto/Desktop/e_data.txt.test'
@@ -50,7 +51,7 @@ if __name__ == '__main__':
                       file_nxt_eco_info_path,
                       output_file)
 
-    data_block = job.joinData()
-    oneHot(data_block, output_file, feat_map_file)
-    splitData(output_file, train_file_path, test_file_path)
+    # job.joinData()
+    # oneHot(output_file, output_file_feat_eng, feat_map_file)
+    # splitData(output_file_feat_eng, train_file_path, test_file_path)
     # trainTest()
