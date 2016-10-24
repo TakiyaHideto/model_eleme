@@ -20,6 +20,24 @@ class DataEcoEnvHandler:
             'resolution': 14,
             'channel': 15
         }
+        self.data_index = {
+            '0': 'list_id',
+            '1': 'is_select',
+            '2': 'day_no',
+            '3': 'minutes',
+            '4': 'eleme_device_id',
+            '5': 'is_new',
+            '6': 'x',
+            '7': 'y',
+            '8': 'user_id',
+            '9': 'network_type',
+            '10': 'platform',
+            '11': 'brand',
+            '12': 'model',
+            '13': 'network_operator',
+            '14': 'resolution',
+            '15': 'channel'
+        }
 
     def getNameIndex(self, feat_name):
         if feat_name not in self.data_handler.keys():
@@ -40,6 +58,16 @@ class DataEcoInfoHandler:
             'is_buy': 5,
             'is_raw_buy': 6,
             'order_id': 7
+        }
+        self.data_index = {
+            '0': 'log_id',
+            '1': 'list_id',
+            '2': 'restaurant_id',
+            '3': 'sort_index',
+            '4': 'is_click',
+            '5': 'is_buy',
+            '6': 'is_raw_buy',
+            '7': 'order_id'
         }
 
     def getNameIndex(self, feat_name):
@@ -81,6 +109,35 @@ class DataOrderInfoHandler:
             'food_name': 25,
             'food_category': 26
         }
+        self.data_index = {
+            '0': 'day_no',
+            '1': 'minutes',
+            '2': 'order_id',
+            '3': 'restaurant_id',
+            '4': 'deliver_fee',
+            '5': 'is_online_paid',
+            '6': 'order_process_minutes',
+            '7': 'restaurant_num',
+            '8': 'address_type',
+            '9': 'is_valid',
+            '10': 'is_book',
+            '11': 'is_coupon',
+            '12': 'is_invoice',
+            '13': 'pindan_flag',
+            '14': 'x',
+            '15': 'y',
+            '16': 'bu_flag_name',
+            '17': 'eleme_order_total',
+            '18': 'total',
+            '19': 'cut_money',
+            '20': 'is_activity',
+            '21': 'has_new_user_subsidy',
+            '22': 'hongbao_amount',
+            '23': 'receiver_deliver_fee',
+            '24': 'user_id',
+            '25': 'food_name',
+            '26': 'food_category'
+        }
 
     def getNameIndex(self, feat_name):
         if feat_name not in self.data_handler.keys():
@@ -121,6 +178,36 @@ class DataRstInfoHandler:
             'food_image_num': 25,
             'is_promotion_info': 26,
             'is_bookable': 27
+        }
+        self.data_handler = {
+            '0': 'restaurant_id',
+            '1': 'primary_category',
+            '2': 'food_name_list',
+            '3': 'category_list',
+            '4': 'x',
+            '5': 'y',
+            '6': 'agent_fee',
+            '7': 'is_premium',
+            '8': 'address_type',
+            '9': 'good_rating_rate',
+            '10': 'has_image',
+            '11': 'has_food_img',
+            '12': 'min_deliver_amount',
+            '13': 'time_ensure_spent',
+            '14': 'is_time_ensure',
+            '15': 'is_ka',
+            '16': 'is_time_ensure_discount',
+            '17': 'is_eleme_deliver',
+            '18': 'bu_flag',
+            '19': 'brand_name',
+            '20': 'service_rating',
+            '21': 'invoice',
+            '22': 'online_payment',
+            '23': 'public_degree',
+            '24': 'food_num',
+            '25': 'food_image_num',
+            '26': 'is_promotion_info',
+            '27': 'is_bookable'
         }
 
     def getNameIndex(self, feat_name):

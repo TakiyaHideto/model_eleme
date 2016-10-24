@@ -72,6 +72,8 @@ class DataLoading:
                 data_with_featname_arr = []
                 data_splited = line.rstrip().split('\t')
                 primary_key_log_id = data_splited[self.data_eco_info_handler.getNameIndex('log_id')]
+                for val in data_splited:
+                    data_with_featname_arr.append()
                 self.nxt_eco_info_data[primary_key_log_id] = data_splited
         print 'finish loading next_eco_info.txt'
 
