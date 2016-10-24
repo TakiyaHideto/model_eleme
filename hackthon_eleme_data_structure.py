@@ -45,6 +45,12 @@ class DataEcoEnvHandler:
             return -1
         return self.data_handler.get(feat_name)
 
+    def getIndexName(self, index):
+        if index not in self.data_index.keys():
+            print "wrong feature index"
+            return 'null'
+        return self.data_index.get(index)
+
 
 # eco_info data handler
 class DataEcoInfoHandler:
@@ -75,6 +81,12 @@ class DataEcoInfoHandler:
             print "wrong feature name"
             return -1
         return self.data_handler.get(feat_name)
+
+    def getIndexName(self, index):
+        if index not in self.data_index.keys():
+            print "wrong feature index"
+            return 'null'
+        return self.data_index.get(index)
 
 
 # order info data handler
@@ -144,6 +156,12 @@ class DataOrderInfoHandler:
             print "wrong feature name"
             return -1
         return self.data_handler.get(feat_name)
+
+    def getIndexName(self, index):
+        if index not in self.data_index.keys():
+            print "wrong feature index"
+            return 'null'
+        return self.data_index.get(index)
 
 
 # rst info data handler
@@ -215,4 +233,10 @@ class DataRstInfoHandler:
             print "wrong feature name"
             return -1
         return self.data_handler.get(feat_name)
+
+    def getIndexName(self, index):
+        if index not in self.data_index.keys():
+            print "wrong feature index"
+            return 'null'
+        return self.data_index.get(index)
 ############################# define data structure #############################

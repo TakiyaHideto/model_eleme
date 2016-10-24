@@ -26,61 +26,80 @@ class DataLoading:
         self.data_order_info_handler = DataOrderInfoHandler()
         self.data_rst_info_handler = DataRstInfoHandler()
 
-    def loadDataHisEcoInfo(self):
-        with open(self.file_his_eco_info_path, 'r') as fi:
-            for line in fi:
-                data_splited = line.rstrip().split('\t')
-                primary_key_log_id = data_splited[self.data_eco_info_handler.getNameIndex('log_id')]
-                self.his_eco_env_data[primary_key_log_id] = data_splited
-        print 'finish loading his_eco_env.txt'
+    def getDataOject(self, data_class_name):
+        if data_class_name == 'data_eco_env_handler':
+            return self.data_eco_env_handler
+        elif data_class_name == 'data_eco_info_handler':
+            return self.data_eco_info_handler
+        elif data_class_name == 'data_order_info_handler':
+            return self.data_order_info_handler
+        elif data_class_name == 'data_rst_info_handler':
+            return self.data_rst_info_handler
+        else:
+            print "wrong data object handler name"
+            exit(1)
 
-    def loadDataHisEcoEnv(self):
-        with open(self.file_his_eco_env_path, 'r') as fi:
-            for line in fi:
-                data_splited = line.rstrip().split('\t')
-                primary_key_log_id = data_splited[self.data_eco_env_handler.getNameIndex('list_id')]
-                self.his_eco_info_data[primary_key_log_id] = data_splited
-        print 'finish loading his_eco_info.txt'
+    def getDataFilePath(self, data_file_name):
+        if data_file_name == 'file_his_eco_env_path':
+            return self.file_his_eco_env_path
+        elif data_file_name == 'file_his_eco_info_path':
+            return self.file_his_eco_info_path
+        elif data_file_name == 'file_order_info_path':
+            return self.file_order_info_path
+        elif data_file_name == 'file_rst_info_path':
+            return self.file_rst_info_path
+        elif data_file_name == 'file_nxt_eco_env_path':
+            return self.file_nxt_eco_env_path
+        elif data_file_name == 'file_nxt_eco_info_path':
+            return self.file_nxt_eco_info_path
+        else:
+            print "wrong data file name"
+            exit(1)
 
-    def loadDataOrdInfo(self):
-        with open(self.file_order_info_path, 'r') as fi:
-            for line in fi:
-                data_splited = line.rstrip().split('\t')
-                primary_key_log_id = data_splited[self.data_order_info_handler.getNameIndex('order_id')]
-                self.order_info_data[primary_key_log_id] = data_splited
-        print 'finish loading his_order_info.txt'
+    def getDataPrimartKey(self, data_class_name):
+        if data_class_name == 'data_eco_env_handler':
+            return self.data_eco_env_handler
+        elif data_class_name == 'data_eco_info_handler':
+            return self.data_eco_info_handler
+        elif data_class_name == 'data_order_info_handler':
+            return self.data_order_info_handler
+        elif data_class_name == 'data_rst_info_handler':
+            return self.data_rst_info_handler
+        else:
+            print "wrong data object handler name"
+            exit(1)
 
-    def loadDataRstInfo(self):
-        with open(self.file_rst_info_path, 'r') as fi:
-            for line in fi:
-                data_splited = line.rstrip().split('\t')
-                primary_key_log_id = data_splited[self.data_rst_info_handler.getNameIndex('restaurant_id')]
-                self.rst_info_data[primary_key_log_id] = data_splited
-        print 'finish loading rst_info.txt'
-
-    def loadDataNxtEcoEnv(self):
-        with open(self.file_nxt_eco_env_path, 'r') as fi:
-            for line in fi:
-                data_splited = line.rstrip().split('\t')
-                primary_key_log_id = data_splited[self.data_eco_env_handler.getNameIndex('list_id')]
-                self.nxt_eco_env_data[primary_key_log_id] = data_splited
-        print 'finish loading next_eco_info.txt'
-
-    def loadDataNxtEcoInfo(self):
-        with open(self.file_nxt_eco_info_path, 'r') as fi:
+    def loadDataInfo(self, data_class_name, data_file_name):
+        data_file_path = self.getDataFilePath(data_file_name)
+        data_object = self.getDataOject(data_class_name)
+        data_primary_key = self.getDataPrimartKey(data_class_name)
+        with open(data_file_path, 'r') as fi:
             for line in fi:
                 data_with_featname_arr = []
                 data_splited = line.rstrip().split('\t')
-                primary_key_log_id = data_splited[self.data_eco_info_handler.getNameIndex('log_id')]
-                for val in data_splited:
-                    data_with_featname_arr.append()
+                primary_key_log_id = data_splited[data_object.getNameIndex(data_primary_key)]
+                for i in range(0,len(data_splited)):
+                    data_with_featname_arr\
+                        .append("{0}:{1}".format(data_object.getIndexName(str(i)),
+                                                 data_splited[i]))
                 self.nxt_eco_info_data[primary_key_log_id] = data_splited
-        print 'finish loading next_eco_info.txt'
+        print 'finish loading {0}'.format(data_file_name)
 
     def loadData(self):
-        self.loadDataHisEcoEnv()
-        self.loadDataHisEcoInfo()
-        self.loadDataOrdInfo()
-        self.loadDataRstInfo()
-        self.loadDataNxtEcoEnv()
-        self.loadDataNxtEcoInfo()
+        self.loadDataInfo(data_class_name='data_eco_env_handler',
+                          data_file_name='file_his_eco_env_path',)
+
+        self.loadDataInfo(data_class_name='data_eco_info_handler',
+                          data_file_name='file_his_eco_info_path', )
+
+        self.loadDataInfo(data_class_name='data_order_info_handler',
+                          data_file_name='file_order_info_path', )
+
+        self.loadDataInfo(data_class_name='data_rst_info_handler',
+                          data_file_name='data_rst_info_handler', )
+
+        self.loadDataInfo(data_class_name='data_eco_env_handler',
+                          data_file_name='file_nxt_eco_env_path', )
+
+        self.loadDataInfo(data_class_name='data_eco_info_handler',
+                          data_file_name='file_nxt_eco_info_path', )
