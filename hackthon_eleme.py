@@ -33,12 +33,12 @@ def trainTest(configuration):
     # make prediction
     # preds = bst.predict(dtest)
     output = os.popen('/Users/hideto/Project/xgboost/xgboost /Users/hideto/Project/model_eleme/{0}.conf'.format(configuration))
-    print output.read()
+    # print output.read()
 
 
 def predict(configuration, model_in):
     output = os.popen('/Users/hideto/Project/xgboost/xgboost /Users/hideto/Project/model_eleme/{0}.conf task=pred model_in="{1}"'.format(configuration, model_in))
-    print output.read()
+    # print output.read()
 
 if __name__ == '__main__':
 
@@ -73,14 +73,14 @@ if __name__ == '__main__':
                       output_file_buy,
                       output_file_nxt)
 
-    # job.joinData()
+    job.joinData()
 
-    # # traing clk
-    # oneHot(output_file_clk, output_file_clk_feat_eng, feat_map_file)
-    # splitData(output_file_clk_feat_eng,
-    #           train_file_path=train_file_path+'clk',
-    #           test_file_path=test_file_path+'clk')
-    # trainTest(configuration='configuration_clk')
+    # traing clk
+    oneHot(output_file_clk, output_file_clk_feat_eng, feat_map_file)
+    splitData(output_file_clk_feat_eng,
+              train_file_path=train_file_path+'clk',
+              test_file_path=test_file_path+'clk')
+    trainTest(configuration='configuration_clk')
 
     # traing buy
     oneHot(output_file_buy, output_file_buy_feat_eng, feat_map_file)
@@ -90,32 +90,34 @@ if __name__ == '__main__':
     trainTest(configuration='configuration_buy')
 
 
-    # # predict nxt
-    # oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
-    # predict(configuration='configuration_clk',
-    #         model_in='clk_mdl.model')
-    # predict(configuration='configuration_buy',
-    #         model_in='buy_mdl.model')
+    # predict nxt
+    oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
+    predict(configuration='configuration_clk',
+            model_in='clk_mdl.model')
+    predict(configuration='configuration_buy',
+            model_in='buy_mdl.model')
 
-    # clk_pre = []
-    # with open('pred_clk.txt', 'r') as fi:
-    #     for line in fi:
-    #         if float(line.rstrip())<0.5:
-    #             prob = '0'
-    #         else:
-    #             prob = '1'
-    #         clk_pre.append(prob)
-    # buy_pre = []
-    # with open('pred_buy.txt', 'r') as fi:
-    #     for line in fi:
-    #         if float(line.rstrip()) < 0.5:
-    #             prob = '0'
-    #         else:
-    #             prob = '1'
-    #         buy_pre.append(prob)
-    #
-    # with open(file_nxt_eco_info_path, 'r') as fi:
-    #     i = 0
-    #     for line in fi:
-    #         log_id = line.rstrip().split('\t')[0]
-    #         print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
+    clk_pre = []
+    with open('pred_clk.txt', 'r') as fi:
+        for line in fi:
+            if float(line.rstrip())<0.5:
+                prob = '0'
+            else:
+                prob = '1'
+            clk_pre.append(prob)
+    buy_pre = []
+    with open('pred_buy.txt', 'r') as fi:
+        for line in fi:
+            if float(line.rstrip()) < 0.5:
+                prob = '0'
+            else:
+                prob = '1'
+            buy_pre.append(prob)
+
+    with open(file_nxt_eco_info_path, 'r') as fi:
+        i = 0
+        for line in fi:
+            if clk_pre[i] == '0' and buy_pre[i] == '0':
+                continue
+            log_id = line.rstrip().split('\t')[0]
+            print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]

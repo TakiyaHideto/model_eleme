@@ -27,7 +27,8 @@ class DataLoading:
         self.data_rst_info_handler = DataRstInfoHandler()
 
     def __del__(self):
-        print 'delete DataLoading class'
+        # print 'delete DataLoading class'
+        pass
 
     def loadDataInfo(self, data_class_name, data_file_name):
         i = 0
@@ -51,7 +52,7 @@ class DataLoading:
                                                  data_splited[i]))
                 data_struct[primary_key_log_id] = data_with_featname_arr
                 i += 1
-        print 'finish loading {0}'.format(data_file_name)
+        # print 'finish loading {0}'.format(data_file_name)
 
     def loadData(self):
         self.loadDataInfo(data_class_name='data_eco_env_handler',
