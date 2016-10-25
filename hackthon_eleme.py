@@ -92,23 +92,25 @@ if __name__ == '__main__':
 
     # oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
 
-    clk_pre = []
-    with open('pred_clk.txt', 'r') as fi:
-        for line in fi:
-            if float(line.rstrip())<0.5:
-                prob = '0'
-            else:
-                prob = '1'
-            clk_pre.append(prob)
-    buy_pre = []
-    with open('pred_buy.txt', 'r') as fi:
-        for line in fi:
-            if float(line.rstrip()) < 0.5:
-                prob = '0'
-            else:
-                prob = '1'
-            buy_pre.append(prob)
-
-    with open(file_nxt_eco_info_path, 'r') as fi:
-        for line in fi:
-            log_id = line.rstrip().split('\t')[0]
+    # clk_pre = []
+    # with open('pred_clk.txt', 'r') as fi:
+    #     for line in fi:
+    #         if float(line.rstrip())<0.5:
+    #             prob = '0'
+    #         else:
+    #             prob = '1'
+    #         clk_pre.append(prob)
+    # buy_pre = []
+    # with open('pred_buy.txt', 'r') as fi:
+    #     for line in fi:
+    #         if float(line.rstrip()) < 0.5:
+    #             prob = '0'
+    #         else:
+    #             prob = '1'
+    #         buy_pre.append(prob)
+    #
+    # with open(file_nxt_eco_info_path, 'r') as fi:
+    #     i = 0
+    #     for line in fi:
+    #         log_id = line.rstrip().split('\t')[0]
+    #         print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
