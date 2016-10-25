@@ -43,6 +43,7 @@ def predict(configuration, model_in):
 if __name__ == '__main__':
 
     file_path_prefix = '/Users/hideto/Downloads/E_data/'
+    output_prefix = '/Users/hideto/Desktop/'
 
     file_his_eco_env_path = file_path_prefix+'his_eco_env.txt'
     file_his_eco_info_path = file_path_prefix+'his_eco_info.txt'
@@ -51,16 +52,16 @@ if __name__ == '__main__':
     file_nxt_eco_env_path = file_path_prefix+'next_eco_env.txt'
     file_nxt_eco_info_path = file_path_prefix+'next_eco_info.txt'
 
-    output_file_clk = file_path_prefix+'output_clk.txt'
-    output_file_buy = file_path_prefix+'output_buy.txt'
-    output_file_clk_feat_eng = file_path_prefix+'output_file_clk_feat_eng.txt'
-    output_file_buy_feat_eng = file_path_prefix+'output_file_buy_feat_eng.txt'
-    output_file_nxt = file_path_prefix+'output_nxt.txt'
-    output_file_nxt_feat_eng = file_path_prefix+'output_nxt_feat_eng.txt'
+    output_file_clk = output_prefix+'output_clk.txt'
+    output_file_buy = output_prefix+'output_buy.txt'
+    output_file_clk_feat_eng = output_prefix+'output_file_clk_feat_eng.txt'
+    output_file_buy_feat_eng = output_prefix+'output_file_buy_feat_eng.txt'
+    output_file_nxt = output_prefix+'output_nxt.txt'
+    output_file_nxt_feat_eng = output_prefix+'output_nxt_feat_eng.txt'
 
-    feat_map_file = file_path_prefix+'feat_map_file.txt'
-    train_file_path = file_path_prefix+'e_data.txt.train'
-    test_file_path = file_path_prefix+'e_data.txt.test'
+    feat_map_file = output_prefix+'feat_map_file.txt'
+    train_file_path = output_prefix+'e_data.txt.train'
+    test_file_path = output_prefix+'e_data.txt.test'
 
     job = DataJoining(file_his_eco_env_path,
                       file_his_eco_info_path,
@@ -72,16 +73,16 @@ if __name__ == '__main__':
                       output_file_buy,
                       output_file_nxt)
 
-    # job.joinData()
+    job.joinData()
 
-    # # 训练clk
+    # # traing clk
     # oneHot(output_file_clk, output_file_clk_feat_eng, feat_map_file)
     # splitData(output_file_clk_feat_eng,
     #           train_file_path=train_file_path+'clk',
     #           test_file_path=test_file_path+'clk')
     # trainTest(configuration='configuration_clk')
 
-    # 训练buy
+    # traing buy
     oneHot(output_file_buy, output_file_buy_feat_eng, feat_map_file)
     splitData(output_file_clk_feat_eng,
               train_file_path=train_file_path + 'buy',
@@ -89,7 +90,7 @@ if __name__ == '__main__':
     trainTest(configuration='configuration_buy')
 
 
-    # # 对nxt进行预测
+    # # predict nxt
     # oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
     # predict(configuration='configuration_clk',
     #         model_in='clk_mdl.model')
