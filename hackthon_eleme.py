@@ -79,21 +79,22 @@ if __name__ == '__main__':
     # splitData(output_file_clk_feat_eng,
     #           train_file_path=train_file_path+'clk',
     #           test_file_path=test_file_path+'clk')
-    trainTest(configuration='configuration_clk')
+    # trainTest(configuration='configuration_clk')
 
-    # # 训练buy
-    # oneHot(output_file_buy, output_file_buy_feat_eng, feat_map_file)
-    # splitData(output_file_clk_feat_eng,
-    #           train_file_path=train_file_path + 'buy',
-    #           test_file_path=test_file_path + 'buy')
-    # trainTest(configuration='configuration_buy')
+    # 训练buy
+    oneHot(output_file_buy, output_file_buy_feat_eng, feat_map_file)
+    splitData(output_file_clk_feat_eng,
+              train_file_path=train_file_path + 'buy',
+              test_file_path=test_file_path + 'buy')
+    trainTest(configuration='configuration_buy')
 
 
+    # # 对nxt进行预测
     # oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
-    predict(configuration='configuration_clk',
-            model_in='clk_mdl.model')
-    predict(configuration='configuration_buy',
-            model_in='buy_mdl.model')
+    # predict(configuration='configuration_clk',
+    #         model_in='clk_mdl.model')
+    # predict(configuration='configuration_buy',
+    #         model_in='buy_mdl.model')
 
     # clk_pre = []
     # with open('pred_clk.txt', 'r') as fi:
