@@ -73,7 +73,7 @@ if __name__ == '__main__':
                       output_file_buy,
                       output_file_nxt)
 
-    job.joinData()
+    # job.joinData()
 
     # # traing clk
     # oneHot(output_file_clk, output_file_clk_feat_eng, feat_map_file)

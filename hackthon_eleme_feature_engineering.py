@@ -47,7 +47,7 @@ def oneHot(input_file, output_file, feat_map_file):
                     try:
                         feat_name = "{0}_{1}".format(elements[i].split(":")[0],
                                                      elements[i].split(":")[1])
-                        if feat_name not in feat_map.keys():
+                        if not feat_map.has_key(feat_name):
                             feat_map[feat_name] = str(feat_index)
                             feat_index += 1
                         records.append("{0}:1".format(feat_map[feat_name]))
