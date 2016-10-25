@@ -1,5 +1,4 @@
 import os
-import psutil
 from hackthon_eleme_data_loading import *
 
 class DataJoining:
