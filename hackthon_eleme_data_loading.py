@@ -112,12 +112,12 @@ class DataLoading:
         print 'finish loading {0}'.format(data_file_name)
 
     def loadData(self):
-        self.loadDataInfo(data_class_name='data_eco_env_handler',
-                          data_file_name='file_his_eco_env_path')
-
-        self.loadDataInfo(data_class_name='data_eco_info_handler',
-                          data_file_name='file_his_eco_info_path')
-
+        # self.loadDataInfo(data_class_name='data_eco_env_handler',
+        #                   data_file_name='file_his_eco_env_path')
+        #
+        # self.loadDataInfo(data_class_name='data_eco_info_handler',
+        #                   data_file_name='file_his_eco_info_path')
+        #
         self.loadDataInfo(data_class_name='data_order_info_handler',
                           data_file_name='file_order_info_path')
 
