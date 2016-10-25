@@ -1,5 +1,6 @@
 
 import os
+import sys
 import commands
 from hackthon_eleme_data_structure import *
 from hackthon_eleme_data_loading import *
@@ -21,29 +22,23 @@ def splitData(data_file_path, train_file_path, test_file_path):
 
 
 def trainTest(configuration):
-    # dtrain = xgb.DMatrix('/Users/hideto/Desktop/output.txt')
-    # dtest = xgb.DMatrix('/Users/hideto/Desktop/e_data.txt.test')
-    # # specify parameters via map
-    # param = {'bst:max_depth': 2, 'bst:eta': 1, 'silent': 1, 'objective': 'binary:logistic'}
-    # param['nthread'] = 4
-    # param['eval_metric'] = 'auc'
-    # num_round = 2
-    # evallist = [(dtrain, 'eval'), (dtrain, 'train')]
-    # bst = xgb.train(param, dtrain, num_round, evallist)
-    # make prediction
-    # preds = bst.predict(dtest)
-    output = os.popen('/Users/hideto/Project/xgboost/xgboost /Users/hideto/Project/model_eleme/{0}.conf'.format(configuration))
-    # print output.read()
+    output = os.popen('/opt/xgboost/xgboost '
+                      '{0}.conf '
+                      .format(configuration))
+
 
 
 def predict(configuration, model_in):
-    output = os.popen('/Users/hideto/Project/xgboost/xgboost /Users/hideto/Project/model_eleme/{0}.conf task=pred model_in="{1}"'.format(configuration, model_in))
-    # print output.read()
+    output = os.popen('/opt/xgboost/xgboost '
+                      '{0}.conf task=pred model_in="{1}"'
+                      .format(configuration, model_in))
+
+
 
 if __name__ == '__main__':
 
-    file_path_prefix = '/Users/hideto/Downloads/E_data/'
-    output_prefix = '/Users/hideto/Desktop/'
+    file_path_prefix = '{0}/'.format(sys.argv[1])
+    output_prefix = ''
 
     file_his_eco_env_path = file_path_prefix+'his_eco_env.txt'
     file_his_eco_info_path = file_path_prefix+'his_eco_info.txt'
@@ -100,7 +95,7 @@ if __name__ == '__main__':
     clk_pre = []
     with open('pred_clk.txt', 'r') as fi:
         for line in fi:
-            if float(line.rstrip())<0.5:
+            if float(line.rstrip())<0.05:
                 prob = '0'
             else:
                 prob = '1'
@@ -108,16 +103,23 @@ if __name__ == '__main__':
     buy_pre = []
     with open('pred_buy.txt', 'r') as fi:
         for line in fi:
-            if float(line.rstrip()) < 0.5:
+            if float(line.rstrip()) < 0.1:
                 prob = '0'
             else:
                 prob = '1'
             buy_pre.append(prob)
 
-    with open(file_nxt_eco_info_path, 'r') as fi:
-        i = 0
-        for line in fi:
-            if clk_pre[i] == '0' and buy_pre[i] == '0':
-                continue
-            log_id = line.rstrip().split('\t')[0]
-            print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
+    with open('final_predict_result.txt', 'w') as fo:
+        with open(file_nxt_eco_info_path, 'r') as fi:
+            i = 0
+            j = 0
+            for line in fi:
+                if j == 0:
+                    j += 1
+                    continue
+                if clk_pre[i] == 0 and buy_pre[i] == 0:
+                    continue
+                log_id = line.rstrip().split('\t')[0]
+                # print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
+                i += 1
+                fo.write(log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i] + '\n')
