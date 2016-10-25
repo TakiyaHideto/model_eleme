@@ -74,14 +74,14 @@ if __name__ == '__main__':
 
     # job.joinData()
 
-
+    # # 训练clk
     # oneHot(output_file_clk, output_file_clk_feat_eng, feat_map_file)
     # splitData(output_file_clk_feat_eng,
     #           train_file_path=train_file_path+'clk',
     #           test_file_path=test_file_path+'clk')
     trainTest(configuration='configuration_clk')
 
-
+    # # 训练buy
     # oneHot(output_file_buy, output_file_buy_feat_eng, feat_map_file)
     # splitData(output_file_clk_feat_eng,
     #           train_file_path=train_file_path + 'buy',
