@@ -74,15 +74,6 @@ class DataLoading:
                           data_file_name='file_nxt_eco_info_path')
 
 
-
-
-
-
-
-
-
-
-
     def getDataOject(self, data_class_name):
         if data_class_name == 'data_eco_env_handler':
             return self.data_eco_env_handler
