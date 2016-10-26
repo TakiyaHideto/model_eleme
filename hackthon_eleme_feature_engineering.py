@@ -24,6 +24,10 @@ feat_cand = [
     'food_num',
     'food_image_num'
 ]
+feat_cand = set(feat_cand)
+
+onehot_feat_arr = []
+onehot_feat_set = set[onehot_feat_arr]
 
 def oneHot(input_file, output_file, feat_map_file):
     feat_map = {}
@@ -45,12 +49,18 @@ def oneHot(input_file, output_file, feat_map_file):
                     if elements[i].split(":")[0] not in feat_cand:
                         continue
                     try:
-                        feat_name = "{0}_{1}".format(elements[i].split(":")[0],
+                        feat_name = elements[i].split(":")[0]
+                        feat_value = elements[i].split(":")[1]
+                        if feat_name in onehot_feat_set:
+                            feat_name = "{0}_{1}".format(elements[i].split(":")[0],
                                                      elements[i].split(":")[1])
+                            feat_value = '1'
+
                         if not feat_map.has_key(feat_name):
                             feat_map[feat_name] = str(feat_index)
                             feat_index += 1
-                        records.append("{0}:1".format(feat_map[feat_name]))
+
+                        records.append("{0}:{1}".format(feat_map[feat_name], feat_value))
                     except IndexError:
                         print i
                         print elements[i]

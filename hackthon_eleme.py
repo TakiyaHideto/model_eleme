@@ -22,16 +22,12 @@ def splitData(data_file_path, train_file_path, test_file_path):
 
 
 def trainTest(configuration):
-    output = os.popen('/opt/xgboost/xgboost '
-                      '{0}.conf '
-                      .format(configuration))
+    output = os.popen('xgboost {0}.conf '.format(configuration))
 
 
 
 def predict(configuration, model_in):
-    output = os.popen('/opt/xgboost/xgboost '
-                      '{0}.conf task=pred model_in="{1}"'
-                      .format(configuration, model_in))
+    output = os.popen('xgboost {0}.conf task=pred model_in="{1}"'.format(configuration, model_in))
 
 
 
