@@ -109,17 +109,16 @@ if __name__ == '__main__':
                 prob = '1'
             buy_pre.append(prob)
 
-    with open('final_predict_result.txt', 'w') as fo:
-        with open(file_nxt_eco_info_path, 'r') as fi:
-            i = 0
-            j = 0
-            for line in fi:
-                if j == 0:
-                    j += 1
-                    continue
-                if clk_pre[i] == 0 and buy_pre[i] == 0:
-                    continue
-                log_id = line.rstrip().split('\t')[0]
-                # print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
-                i += 1
-                fo.write(log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i] + '\n')
+    with open(file_nxt_eco_info_path, 'r') as fi:
+        i = 0
+        j = 0
+        for line in fi:
+            if j == 0:
+                j += 1
+                continue
+            if clk_pre[i] == 0 and buy_pre[i] == 0:
+                continue
+            log_id = line.rstrip().split('\t')[0]
+            # print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
+            i += 1
+            print >>sys.stdout, log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
