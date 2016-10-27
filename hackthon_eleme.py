@@ -67,21 +67,21 @@ if __name__ == '__main__':
     job.joinData()
 
     # traing clk
-    oneHot(output_file_clk, output_file_clk_feat_eng, feat_map_file)
+    feature_engineering(output_file_clk, output_file_clk_feat_eng, feat_map_file)
     splitData(output_file_clk_feat_eng,
               train_file_path=train_file_path+'clk',
               test_file_path=test_file_path+'clk')
     trainTest(configuration='configuration_clk')
 
     # traing buy
-    oneHot(output_file_buy, output_file_buy_feat_eng, feat_map_file)
+    feature_engineering(output_file_buy, output_file_buy_feat_eng, feat_map_file)
     splitData(output_file_clk_feat_eng,
               train_file_path=train_file_path + 'buy',
               test_file_path=test_file_path + 'buy')
     trainTest(configuration='configuration_buy')
 
     # predict nxt
-    oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
+    feature_engineering(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
     predict(configuration='configuration_clk',
             model_in='clk_mdl.model',
             prediction_file=output_file_nxt_feat_eng)

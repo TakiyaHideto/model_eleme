@@ -80,3 +80,6 @@ def outputFeatMap(feat_map, feat_map_file):
 
 
 ################### feat eng: one hot ###################
+
+def feature_engineering(input_file, output_file, feat_map_file):
+    oneHot(input_file, output_file, feat_map_file)
