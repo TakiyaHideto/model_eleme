@@ -92,7 +92,7 @@ if __name__ == '__main__':
     clk_pre = []
     with open('pred_clk.txt', 'r') as fi:
         for line in fi:
-            if float(line.rstrip())<0.5:
+            if float(line.rstrip())<0.416136:
                 prob = '0'
             else:
                 prob = '1'
@@ -100,7 +100,7 @@ if __name__ == '__main__':
     buy_pre = []
     with open('pred_buy.txt', 'r') as fi:
         for line in fi:
-            if float(line.rstrip()) < 0.1:
+            if float(line.rstrip()) < 0.0813695:
                 prob = '0'
             else:
                 prob = '1'
