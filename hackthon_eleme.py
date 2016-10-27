@@ -80,7 +80,6 @@ if __name__ == '__main__':
               test_file_path=test_file_path + 'buy')
     trainTest(configuration='configuration_buy')
 
-
     # predict nxt
     oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
     predict(configuration='configuration_clk',
