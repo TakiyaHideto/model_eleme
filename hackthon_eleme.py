@@ -27,7 +27,7 @@ def trainTest(configuration):
 
 
 def predict(configuration, model_in, prediction_file):
-    output = os.popen('xgboost {0}.conf task=pred model_in="{1}" test:data={2}'.format(configuration, model_in, prediction_file))
+    output = os.popen('xgboost {0}.conf task=pred model_in="{1}" test:data="{2}"'.format(configuration, model_in, prediction_file))
 
 
 
@@ -92,7 +92,7 @@ if __name__ == '__main__':
     clk_pre = []
     with open('pred_clk.txt', 'r') as fi:
         for line in fi:
-            if float(line.rstrip())<0.05:
+            if float(line.rstrip())<0.5:
                 prob = '0'
             else:
                 prob = '1'
@@ -110,12 +110,11 @@ if __name__ == '__main__':
         i = 0
         j = 0
         for line in fi:
+            log_id = line.rstrip().split('\t')[0]
             if j == 0:
                 j += 1
                 continue
             if clk_pre[i] == 0 and buy_pre[i] == 0:
                 continue
-            log_id = line.rstrip().split('\t')[0]
-            # print log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
-            i += 1
             print >>sys.stdout, log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
+            i += 1
