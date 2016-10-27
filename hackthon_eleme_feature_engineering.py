@@ -26,8 +26,11 @@ feat_cand = [
 ]
 feat_cand = set(feat_cand)
 
-onehot_feat_arr = []
-onehot_feat_set = set[onehot_feat_arr]
+onehot_feat_arr = [
+    'primary_category',
+    'bu_flag'
+]
+onehot_feat_set = set(onehot_feat_arr)
 
 def oneHot(input_file, output_file, feat_map_file):
     feat_map = {}
@@ -57,8 +60,8 @@ def oneHot(input_file, output_file, feat_map_file):
                             feat_value = '1'
 
                         if not feat_map.has_key(feat_name):
-                            feat_map[feat_name] = str(feat_index)
                             feat_index += 1
+                            feat_map[feat_name] = str(feat_index)
 
                         records.append("{0}:{1}".format(feat_map[feat_name], feat_value))
                     except IndexError:

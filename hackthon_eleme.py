@@ -26,8 +26,8 @@ def trainTest(configuration):
 
 
 
-def predict(configuration, model_in):
-    output = os.popen('xgboost {0}.conf task=pred model_in="{1}"'.format(configuration, model_in))
+def predict(configuration, model_in, prediction_file):
+    output = os.popen('xgboost {0}.conf task=pred model_in="{1}" test:data={2}'.format(configuration, model_in, prediction_file))
 
 
 
@@ -84,9 +84,11 @@ if __name__ == '__main__':
     # predict nxt
     oneHot(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
     predict(configuration='configuration_clk',
-            model_in='clk_mdl.model')
+            model_in='clk_mdl.model',
+            prediction_file=output_file_nxt_feat_eng)
     predict(configuration='configuration_buy',
-            model_in='buy_mdl.model')
+            model_in='buy_mdl.model',
+            prediction_file=output_file_nxt_feat_eng)
 
     clk_pre = []
     with open('pred_clk.txt', 'r') as fi:
