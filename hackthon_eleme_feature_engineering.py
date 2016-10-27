@@ -3,6 +3,10 @@
 # notice that data_block and output_file are required to writtern as the necessary paras in all the functions
 import os
 
+def feature_engineering(input_file, output_file, feat_map_file):
+    oneHot(input_file, output_file, feat_map_file)
+
+
 ################### feat eng: one hot ###################
 feat_cand = [
     'is_select',
@@ -80,6 +84,3 @@ def outputFeatMap(feat_map, feat_map_file):
 
 
 ################### feat eng: one hot ###################
-
-def feature_engineering(input_file, output_file, feat_map_file):
-    oneHot(input_file, output_file, feat_map_file)
