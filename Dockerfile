@@ -15,5 +15,8 @@ ADD hackthon_eleme_data_joining.py /hackthon_eleme_data_joining.py
 ADD hackthon_eleme_data_loading.py /hackthon_eleme_data_loading.py
 ADD hackthon_eleme_data_structure.py /hackthon_eleme_data_structure.py
 ADD hackthon_eleme_feature_engineering.py /hackthon_eleme_feature_engineering.py
+ADD hackthon_eleme_feature_processing.py /hackthon_eleme_feature_processing.py
+ADD hackthon_eleme_feature_processing_all.py /hackthon_eleme_feature_processing_all.py
+ADD feat_map_file.txt /feat_map_file.txt
 ADD configuration_buy.conf /configuration_buy.conf
 ADD configuration_clk.conf /configuration_clk.conf

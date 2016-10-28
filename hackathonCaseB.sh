@@ -22,5 +22,7 @@ then
 	exit 0
 fi
 
+export PATH=${PATH}:/opt/xgboost
+
 python hackthon_eleme.py ${input_dir} >${output_dir}/result.txt
 #----your code end here-----------------------------------------------------#
