@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/model_eleme.iml" filepath="$PROJECT_DIR$/.idea/model_eleme.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/shop_subsidy/.idea/shop_subsidy.iml" filepath="$USER_HOME$/PycharmProjects/shop_subsidy/.idea/shop_subsidy.iml" />
     </modules>
   </component>
 </project>

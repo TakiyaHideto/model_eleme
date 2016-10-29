@@ -59,14 +59,14 @@ class DataJoining:
                     is_click = data_his_eco_info_arr[self.DataLoadingClass.data_eco_info_handler.getNameIndex('is_click')].split(":")[1]
                     is_buy = data_his_eco_info_arr[self.DataLoadingClass.data_eco_info_handler.getNameIndex('is_buy')]
                     if order_id != '"NULL"':
-                        data_basic = '\t'.join(data_his_eco_info_arr) + '\t' + \
-                                     '\t'.join(data_his_eco_env_arr) + '\t' + \
-                                     '\t'.join(data_order_info_arr) + '\t' + \
-                                     '\t'.join(data_rst_info_arr)
+                        data_basic = 'info@' + '\tinfo@'.join(data_his_eco_info_arr) + '\t' + \
+                                     'env@' + '\tenv@'.join(data_his_eco_env_arr) + '\t' + \
+                                     'ord@' + '\tord@'.join(data_order_info_arr) + '\t' + \
+                                     'rst@' + '\trst@'.join(data_rst_info_arr)
                     else:
-                        data_basic = '\t'.join(data_his_eco_info_arr) + '\t' + \
-                                     '\t'.join(data_his_eco_env_arr) + '\t' + \
-                                     '\t'.join(data_rst_info_arr)
+                        data_basic = 'info@' + '\tinfo@'.join(data_his_eco_info_arr) + '\t' + \
+                                     'env@' + '\tenv@'.join(data_his_eco_env_arr) + '\t' + \
+                                     'rst@' + '\trst@'.join(data_rst_info_arr)
                     data_click = is_click + '\t' + data_basic
                     data_buy = is_buy + '\t' + data_basic
                     fo_click.write("{0}\n".format(data_click))
@@ -82,7 +82,7 @@ class DataJoining:
                 data_rst_info_arr = self.DataLoadingClass.rst_info_data[rst_id]
 
                 data_str = '0' + '\t' + \
-                           '\t'.join(data_nxt_eco_info_arr) + '\t' + \
-                           '\t'.join(data_nxt_eco_env_arr) + '\t' + \
-                           '\t'.join(data_rst_info_arr)
+                           'info@' + '\tinfo@'.join(data_nxt_eco_info_arr) + '\t' + \
+                           'env@' + '\tenv@'.join(data_nxt_eco_env_arr) + '\t' + \
+                           'rst@' + '\trst@'.join(data_rst_info_arr)
                 fo.write("{0}\n".format(data_str))
