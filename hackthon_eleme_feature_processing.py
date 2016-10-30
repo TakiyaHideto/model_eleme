@@ -1,5 +1,7 @@
 #feature processing
-#encoding='utf-8'
+
+import math
+
 class Featureprocessing:
     def __init__(self,
                  dic_input):
@@ -65,7 +67,21 @@ class Featureprocessing:
         result_value=(value-min_value)/(max_value-min_value)
         return result_value
         
+    def getfoodname(self,col_name):
+        value=self.dic_input[col_name]
+        
+        value=value.replace('"','')
+        #value.replace('','')
+        result_list=value.split(',')
+        return result_list
 
+    def getdistance(self,col_name1,col_name2,col_name3,col_name4):
+        value1=float(self.dic_input[col_name1])
+        value2=float(self.dic_input[col_name2])
+        value3=float(self.dic_input[col_name3])
+        value4=float(self.dic_input[col_name4])
+        result_value=math.sqrt((value1-value2)*(value1-value2)+(value3-value4)*(value3-value4))
+        return result_value        
         
 #dicttest={'a':1,'b':'a,b,c,d,e','c':'c,d,e'}
 #lista=['a','e','f']

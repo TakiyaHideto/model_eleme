@@ -1,19 +1,66 @@
 from hackthon_eleme_feature_processing import *
 import os
 
+feat_cand = [
+    'info@restaurant_id',
+    'info@sort_index',
+    'info@is_raw_buy',	
+    'env@is_select',
+    'env@day_no',	
+    'env@minutes',	
+    'env@is_new',
+    'env@eleme_device_id',
+    'env@x',
+    'env@y',
+    'env@user_id',
+    'env@network_type',	
+    'env@platform',		
+    'env@network_operator',	
+    'env@resolution',	
+    'rst@primary_category',	
+    'rst@food_name_list',	
+    'rst@category_list',	
+    'rst@x',	
+    'rst@y',	
+    'rst@agent_fee',	
+    'rst@address_type',	
+    'rst@good_rating_rate',		
+    'rst@has_image',
+    'rst@has_food_img',	
+    'rst@min_deliver_amount',	
+    'rst@time_ensure_spent',	
+    'rst@is_time_ensure_discount',	
+    'rst@is_eleme_deliver',
+    'rst@radius',
+    'rst@bu_flag',	
+    'rst@service_rating',	
+    'rst@invoice',	
+    'rst@public_degree',	
+    'rst@food_num',	
+    'rst@food_image_num',
+    'rst@is_promotion_info',	
+    'rst@is_bookable',
+
+]
+    
+
+
 onehot_feat_cand = [
-    'day_no',
-    'minutes',
-    'network_type',
-    'platform',
-    'network_operator',
-    'primary_category',
-    'address_type',
-    'time_ensure_spent',
-    'bu_flag',
-    'public_degree',
-    'food_num',
-    'food_image_num'
+    'info@restaurant_id',
+    'env@day_no',
+    'env@minutes',
+    'env@eleme_device_id',
+    'env@network_type',
+    'env@platform',
+    'env@network_operator',
+    'env@user_id',
+    'rst@primary_category',
+    'rst@address_type',
+    'rst@time_ensure_spent',
+    'rst@bu_flag',
+    'rst@public_degree',
+    'rst@food_num',
+    'rst@food_image_num'
     
     
 ]
@@ -25,7 +72,11 @@ def str2dic(input_str):
     value_list=input_value.split('\t')
     for i in range(0,len(value_list)):
         elements=value_list[i].rstrip().split(':')
-        result_dic[elements[0]]=elements[1]
+        if elements[0] not in feat_cand:
+            continue
+        else:
+#            print 'ok',elements[0]
+            result_dic[elements[0]]=elements[1]
     return result_dic
 
 def dic2str(input_dic):
@@ -77,6 +128,10 @@ def oneHot(input_file, output_file, feat_map_file):
                 label = elements[0]
                 for i in range(1, len(elements)):
                     if elements[i].split(":")[0] not in onehot_feat_cand:
+                        if not feat_map.has_key(elements[i].split(":")[0]):
+                            feat_index += 1
+                            feat_map[elements[i].split(":")[0]] = str(feat_index)
+                            
                         continue
                     try:
                         feat_name = "{0}_{1}".format(elements[i].split(":")[0],
@@ -116,40 +171,58 @@ def featureProcessing(input_file,output_file):
                 feature_line='\t'.join(element[1:])
                 content_dic=str2dic(feature_line)
                 featuremap=Featureprocessing(content_dic)
-                content_dic.pop('log_id')
-                content_dic.pop('list_id')
-                content_dic.pop('restaurant_id')
-                content_dic['sort_index']=featuremap.normalization('sort_index',200,1)
-                content_dic['day_no']=featuremap.transformweek('day_no')
-                content_dic['minutes']=featuremap.split3('minutes',600,840)
-                content_dic.pop('eleme_device_id')
-                content_dic['x']=featuremap.normalization('x',0,10)
-                content_dic['y']=featuremap.normalization('y',0,10)
-                content_dic.pop('user_id')
-                content_dic['network_type']=featuremap.name2num('network_type',['"2G"','"3G"','"4G"','"WIFI"','"UNKNOWN"'])        
-                content_dic['platform']=featuremap.name2num('platform',['"iOS"','"Android"'])
-                content_dic.pop('brand')
-                content_dic.pop('model')
-                content_dic['resolution']=featuremap.resolution('resolution')
-                content_dic['resolution']=featuremap.normalization('resolution',500000,3000000)
-                content_dic.pop('channel')
+                content_dic.pop('info@log_id')
+                content_dic.pop('info@list_id')
+                content_dic.pop('info@restaurant_id')
+                content_dic['info@sort_index']=featuremap.normalization('info@sort_index',200,1)
+                content_dic.pop('info@is_click')
+                content_dic.pop('info@is_buy')
+                content_dic.pop('info@order_id')
+                content_dic.pop('env@list_id')
+                content_dic['env@day_no']=featuremap.transformweek('env@day_no')
+                content_dic['env@minutes']=featuremap.split3('env@minutes',600,840)
+                content_dic.pop('env@eleme_device_id')
+                content_dic['distance']=featuremap.getdistance('env@x','env@y','rst@x','rst@y')
+                content_dic.pop('env@x')
+                content_dic.pop('env@y')
+                content_dic.pop('env@user_id')
+                content_dic['env@network_type']=featuremap.name2num('env@network_type',['"2G"','"3G"','"4G"','"WIFI"','"UNKNOWN"'])        
+                content_dic['env@platform']=featuremap.name2num('env@platform',['"iOS"','"Android"'])
+                content_dic.pop('env@brand')
+                content_dic.pop('env@model')
+                content_dic['env@resolution']=featuremap.resolution('env@resolution')
+                content_dic['evn@resolution']=featuremap.normalization('env@resolution',500000,3000000)
+                content_dic.pop('env@channel')
+                content_dic.pop('rst@restaurant_id')
+                content_dic.pop('rst@x')
+                content_dic.pop('rst@y')
                 content_dic.pop('food_name_list')
                 content_dic.pop('category_list')
-                content_dic['agent_fee']=featuremap.normalization('agent_fee',0,10)
-                content_dic.pop('is_premium')
-                content_dic.pop('open_month_num')
-                content_dic['min_deliver_amount']=featuremap.normalization('min_deliver_amount',0,50)                
-                content_dic.pop('is_time_ensure')
-                content_dic.pop('is_ka')
-                content_dic['radius']=featuremap.normalization('radius',0,3)
-                content_dic.pop('brand_name')
-                content_dic['service_rating']=featuremap.normalization('service_rating',4,5)                
-                content_dic.pop('online_payment')
-                content_dic['food_num']=featuremap.split3('food_num',100,200)
-                content_dic['food_image_num']=featuremap.split3('food_image_num',60,150)
-            
+                content_dic['rst@agent_fee']=featuremap.normalization('rst@agent_fee',0,10)
+                content_dic.pop('rst@is_premium')
+                content_dic.pop('rst@open_month_num')
+                content_dic['rst@min_deliver_amount']=featuremap.normalization('rst@min_deliver_amount',0,50)                
+                content_dic.pop('rst@is_time_ensure')
+                content_dic.pop('rst@is_ka')
+                content_dic['rst@radius']=featuremap.normalization('rst@radius',0,3)
+                content_dic.pop('rst@brand_name')
+                content_dic['rst@service_rating']=featuremap.normalization('rst@service_rating',4,5)                
+
+                content_dic.pop('rst@online_payment')
+                content_dic['rst@food_num']=featuremap.split3('rst@food_num',100,200)
+                content_dic['rst@food_image_num']=featuremap.split3('rst@food_image_num',60,150)
+                food_name_list=featuremap.getfoodname('rst@food_name_list')
+                category_list=featuremap.getfoodname('rst@category_list')
+                for i in range(0,len(food_name_list)):
+                    content_dic[food_name_list[i]]=1
+                for i in range(0,len(category_list)):
+                    content_dic[category_list[i]]=1
+                content_dic.pop('rst@food_name_list')
+                content_dic.pop('rst@category_list')
+                
                 # a little strange of this line
-            
+    
+                
                 new_feature_line=dic2str(content_dic)
                 new_line="{0}\t{1}\n".format(label, new_feature_line)
                 fo.write(new_line)
