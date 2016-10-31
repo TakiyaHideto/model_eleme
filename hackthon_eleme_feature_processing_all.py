@@ -2,17 +2,14 @@ from hackthon_eleme_feature_processing import *
 import os
 
 feat_cand = [
-    'info@restaurant_id',
     'info@sort_index',
     'info@is_raw_buy',	
     'env@is_select',
     'env@day_no',	
     'env@minutes',	
     'env@is_new',
-    'env@eleme_device_id',
     'env@x',
     'env@y',
-    'env@user_id',
     'env@network_type',	
     'env@platform',		
     'env@network_operator',	
@@ -46,14 +43,11 @@ feat_cand = [
 
 
 onehot_feat_cand = [
-    'info@restaurant_id',
     'env@day_no',
     'env@minutes',
-    'env@eleme_device_id',
     'env@network_type',
     'env@platform',
     'env@network_operator',
-    'env@user_id',
     'rst@primary_category',
     'rst@address_type',
     'rst@time_ensure_spent',
