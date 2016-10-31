@@ -90,17 +90,25 @@ if __name__ == '__main__':
             prediction_file=output_file_nxt_feat_eng)
     
     clk_pre = []
+    raw_data = []
     with open('pred_clk.txt', 'r') as fi:
         for line in fi:
-            if float(line.rstrip())<0.417547:
+            raw_data.append(float(line.rstrip()))
+        threshold = sorted(raw_data, reverse=True)[int(len(raw_data) * 0.05 + 0.5)]
+        for value in raw_data:
+            if value < threshold:
                 prob = '0'
             else:
                 prob = '1'
             clk_pre.append(prob)
     buy_pre = []
+    raw_data = []
     with open('pred_buy.txt', 'r') as fi:
         for line in fi:
-            if float(line.rstrip()) < 0.1588475:
+            raw_data.append(float(line.rstrip()))
+        threshold = sorted(raw_data, reverse=True)[int(len(raw_data) * 0.001 + 0.5)]
+        for value in raw_data:
+            if value < threshold:
                 prob = '0'
             else:
                 prob = '1'
@@ -113,8 +121,6 @@ if __name__ == '__main__':
             log_id = line.rstrip().split('\t')[0]
             if j == 0:
                 j += 1
-                continue
-            if clk_pre[i] == 0 and buy_pre[i] == 0:
                 continue
             print >>sys.stdout, log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
             i += 1
