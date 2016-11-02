@@ -8,8 +8,8 @@ from hackthon_eleme_data_joining import *
 from hackthon_eleme_feature_engineering import *
 
 # DEFINE MACRO
-USER_CLK_THRESHOLD = 0.05
-USER_BUY_THRESHOLD = 0.01
+USER_CLK_THRESHOLD = 0.10
+USER_BUY_THRESHOLD = 0.05
 
 
 
@@ -67,33 +67,33 @@ if __name__ == '__main__':
                       output_file_buy,
                       output_file_nxt)
 
-    job.joinData()
-
-    # traing clk
-    feature_engineering(output_file_clk, output_file_clk_feat_eng, feat_map_file)
-    splitData(output_file_clk_feat_eng,
-              train_file_path=train_file_path+'clk',
-              test_file_path=test_file_path+'clk')
-    trainTest(configuration='configuration_clk')
-    
-    # traing buy
-    feature_engineering(output_file_buy, output_file_buy_feat_eng, feat_map_file)
-    splitData(output_file_clk_feat_eng,
-              train_file_path=train_file_path + 'buy',
-              test_file_path=test_file_path + 'buy')
-    trainTest(configuration='configuration_buy')
-    
-    # predict nxt
-    feature_engineering(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
-    predict(configuration='configuration_clk',
-            model_in='clk_mdl.model',
-            prediction_file=output_file_nxt_feat_eng)
-    predict(configuration='configuration_buy',
-            model_in='buy_mdl.model',
-            prediction_file=output_file_nxt_feat_eng)
-
-
-################################################################################################
+#     job.joinData()
+#
+#     # traing clk
+#     feature_engineering(output_file_clk, output_file_clk_feat_eng, feat_map_file)
+#     splitData(output_file_clk_feat_eng,
+#               train_file_path=train_file_path+'clk',
+#               test_file_path=test_file_path+'clk')
+#     trainTest(configuration='configuration_clk')
+#
+#     # traing buy
+#     feature_engineering(output_file_buy, output_file_buy_feat_eng, feat_map_file)
+#     splitData(output_file_clk_feat_eng,
+#               train_file_path=train_file_path + 'buy',
+#               test_file_path=test_file_path + 'buy')
+#     trainTest(configuration='configuration_buy')
+#
+#     # predict nxt
+#     feature_engineering(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
+#     predict(configuration='configuration_clk',
+#             model_in='clk_mdl.model',
+#             prediction_file=output_file_nxt_feat_eng)
+#     predict(configuration='configuration_buy',
+#             model_in='buy_mdl.model',
+#             prediction_file=output_file_nxt_feat_eng)
+#
+#
+# ################################################################################################
     clk_probabilty = []
     with open('pred_clk.txt', 'r') as fi:
         for line in fi:
@@ -114,7 +114,8 @@ if __name__ == '__main__':
             if clk_usr_pre_dict.has_key(user_id):
                 clk_usr_pre_dict[user_id].append(float(clk_probabilty[i]))
             else:
-                clk_usr_pre_dict[user_id] = list(float(clk_probabilty[i]))
+                clk_usr_pre_dict[user_id] = []
+                clk_usr_pre_dict[user_id].append(float(clk_probabilty[i]))
             clk_probabilty[i] = "{0}${1}".format(clk_probabilty[i],user_id)
             i += 1
 
@@ -127,20 +128,21 @@ if __name__ == '__main__':
             if buy_usr_pre_dict.has_key(user_id):
                 buy_usr_pre_dict[user_id].append(float(buy_probabilty[i]))
             else:
-                buy_usr_pre_dict[user_id] = list(float(buy_probabilty[i]))
+                buy_usr_pre_dict[user_id] = []
+                buy_usr_pre_dict[user_id].append(float(buy_probabilty[i]))
             buy_probabilty[i] = "{0}${1}".format(buy_probabilty[i], user_id)
             i += 1
 
     for key in clk_usr_pre_dict.keys():
         clk_usr_pre_dict[key] = sorted(clk_usr_pre_dict[key], reverse=True)
         buy_usr_pre_dict[key] = sorted(buy_usr_pre_dict[key], reverse=True)
-
+#
 
     clk_pre = []
     raw_data = []
     for i in range(0, len(clk_probabilty)):
         probabilty = float(clk_probabilty[i].split('$')[0])
-        user_id = clk_probabilty[i].split('$')[0]
+        user_id = clk_probabilty[i].split('$')[1]
         threshold = float(clk_usr_pre_dict[user_id][int(len(clk_usr_pre_dict[user_id])*USER_CLK_THRESHOLD)])
         if probabilty > threshold:
             clk_pre.append('1')
