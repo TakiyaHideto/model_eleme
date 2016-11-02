@@ -110,7 +110,7 @@ if __name__ == '__main__':
         i = 0
         for line in fi:
             elements = line.rstrip().split('\t')
-            user_id = elements[17]
+            user_id = elements[13]
             if clk_usr_pre_dict.has_key(user_id):
                 clk_usr_pre_dict[user_id].append(float(clk_probabilty[i]))
             else:
@@ -124,7 +124,7 @@ if __name__ == '__main__':
         i = 0
         for line in fi:
             elements = line.rstrip().split('\t')
-            user_id = elements[17]
+            user_id = elements[13]
             if buy_usr_pre_dict.has_key(user_id):
                 buy_usr_pre_dict[user_id].append(float(buy_probabilty[i]))
             else:
@@ -191,3 +191,5 @@ if __name__ == '__main__':
                 continue
             print >>sys.stdout, log_id + '\t' + clk_pre[i] + '\t' + buy_pre[i]
             i += 1
+
+    print len(clk_usr_pre_dict.keys())
