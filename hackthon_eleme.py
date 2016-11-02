@@ -163,7 +163,7 @@ if __name__ == '__main__':
     raw_data = []
     for i in range(0, len(buy_probabilty)):
         probabilty = float(buy_probabilty[i].split('$')[0])
-        user_id = buy_probabilty[i].split('$')[0]
+        user_id = buy_probabilty[i].split('$')[1]
         threshold = float(buy_usr_pre_dict[user_id][int(len(buy_usr_pre_dict[user_id]) * USER_BUY_THRESHOLD)])
         if probabilty > threshold:
             buy_pre.append('1')
