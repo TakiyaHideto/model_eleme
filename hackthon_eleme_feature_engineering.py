@@ -17,3 +17,11 @@ def feature_engineering(input_file, output_file, feat_map_file):
 
 
 ################### feat eng: one hot ###################
+
+
+
+
+#
+# def feature_eng(input_file, output_file, feat_map_file):
+#     with open(input_file, 'r') as fi:
+#         for line in fi:

@@ -57,7 +57,7 @@ class DataJoining:
                     data_rst_info_arr = self.DataLoadingClass.rst_info_data[rst_id]
                     # join data
                     is_click = data_his_eco_info_arr[self.DataLoadingClass.data_eco_info_handler.getNameIndex('is_click')].split(":")[1]
-                    is_buy = data_his_eco_info_arr[self.DataLoadingClass.data_eco_info_handler.getNameIndex('is_buy')]
+                    is_buy = data_his_eco_info_arr[self.DataLoadingClass.data_eco_info_handler.getNameIndex('is_buy')].split(":")[1]
                     if order_id != '"NULL"':
                         data_basic = 'info@' + '\tinfo@'.join(data_his_eco_info_arr) + '\t' + \
                                      'env@' + '\tenv@'.join(data_his_eco_env_arr) + '\t' + \

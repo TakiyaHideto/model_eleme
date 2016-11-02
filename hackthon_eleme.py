@@ -79,42 +79,42 @@ if __name__ == '__main__':
                       output_file_buy,
                       output_file_nxt)
 
-    # job.joinData()
+    job.joinData()
 
-    # traing clk
-    splitData(data_file_path=output_file_clk,
-              train_file_path=train_raw_path,
-              test_file_path=test_raw_path)
-    feature_engineering(input_file=train_raw_path,
-                        output_file=train_file_path + 'clk',
-                        feat_map_file=feat_map_file)
-    feature_engineering(input_file=test_raw_path,
-                        output_file=test_file_path + 'clk',
-                        feat_map_file=feat_map_file)
-    trainTest(configuration='configuration_clk')
-
-    # traing buy
-    splitData(data_file_path=output_file_buy,
-              train_file_path=train_raw_path,
-              test_file_path=test_raw_path)
-    feature_engineering(input_file=train_raw_path,
-                        output_file=train_file_path + 'buy',
-                        feat_map_file=feat_map_file)
-    feature_engineering(input_file=test_raw_path,
-                        output_file=test_file_path + 'buy',
-                        feat_map_file=feat_map_file)
-    trainTest(configuration='configuration_buy')
-
-    # predict nxt
-    feature_engineering(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
-    predict(configuration='configuration_clk',
-            model_in='clk_mdl.model',
-            prediction_file=output_file_nxt_feat_eng)
-    predict(configuration='configuration_buy',
-            model_in='buy_mdl.model',
-            prediction_file=output_file_nxt_feat_eng)
-
-
+#     # traing clk
+#     splitData(data_file_path=output_file_clk,
+#               train_file_path=train_raw_path,
+#               test_file_path=test_raw_path)
+#     feature_engineering(input_file=train_raw_path,
+#                         output_file=train_file_path + 'clk',
+#                         feat_map_file=feat_map_file)
+#     feature_engineering(input_file=test_raw_path,
+#                         output_file=test_file_path + 'clk',
+#                         feat_map_file=feat_map_file)
+#     trainTest(configuration='configuration_clk')
+#
+#     # traing buy
+#     splitData(data_file_path=output_file_buy,
+#               train_file_path=train_raw_path,
+#               test_file_path=test_raw_path)
+#     feature_engineering(input_file=train_raw_path,
+#                         output_file=train_file_path + 'buy',
+#                         feat_map_file=feat_map_file)
+#     feature_engineering(input_file=test_raw_path,
+#                         output_file=test_file_path + 'buy',
+#                         feat_map_file=feat_map_file)
+#     trainTest(configuration='configuration_buy')
+#
+#     # predict nxt
+#     feature_engineering(output_file_nxt, output_file_nxt_feat_eng, feat_map_file)
+#     predict(configuration='configuration_clk',
+#             model_in='clk_mdl.model',
+#             prediction_file=output_file_nxt_feat_eng)
+#     predict(configuration='configuration_buy',
+#             model_in='buy_mdl.model',
+#             prediction_file=output_file_nxt_feat_eng)
+#
+#
 # ################################################################################################
 #     clk_probabilty = []
 #     with open('pred_clk.txt', 'r') as fi:
@@ -158,7 +158,7 @@ if __name__ == '__main__':
 #     for key in clk_usr_pre_dict.keys():
 #         clk_usr_pre_dict[key] = sorted(clk_usr_pre_dict[key], reverse=True)
 #         buy_usr_pre_dict[key] = sorted(buy_usr_pre_dict[key], reverse=True)
-# #
+#
 #
 #     clk_pre = []
 #     raw_data = []
