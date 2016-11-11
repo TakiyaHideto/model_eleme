@@ -43,6 +43,38 @@ def predict(configuration, model_in, prediction_file):
     output = os.popen('xgboost {0}.conf task=pred model_in="{1}" test:data="{2}"'.format(configuration, model_in, prediction_file))
 
 
+feat_map = {
+    'sort_index':'1',
+    'is_select':'2',
+    'day_no':'3',
+    'minutes':'4',
+    'is_new':'5',
+    'resolution_length':'6',
+    'resolution_wide':'7',
+    'channel':'8',
+    'agent_fee':'9',
+    'is_premium':'10',
+    'good_rating_rate':'11',
+    'has_image':'12',
+    'has_food_img':'13',
+    'min_deliver_amount':'14',
+    'time_ensure_spent':'15',
+    'is_time_ensure':'16',
+    'is_ka':'17',
+    'radius':'18',
+    'service_rating':'19',
+    'invoice':'20',
+    'online_payment':'21',
+    'public_degree':'22',
+    'food_num':'23',
+    'food_image_num':'24',
+    'is_promotion_info':'25',
+    'distance':'26'
+}
+
+feat_map_index_max = len(feat_map.keys()) + 1
+
+
 
 if __name__ == '__main__':
 
@@ -79,19 +111,29 @@ if __name__ == '__main__':
                       output_file_buy,
                       output_file_nxt)
 
-    job.joinData()
+    # job.joinData()
 
-#     # traing clk
-#     splitData(data_file_path=output_file_clk,
-#               train_file_path=train_raw_path,
-#               test_file_path=test_raw_path)
+    # # traing clk
+    # splitData(data_file_path=output_file_clk,
+    #           train_file_path=train_raw_path,
+    #           test_file_path=test_raw_path)
 #     feature_engineering(input_file=train_raw_path,
 #                         output_file=train_file_path + 'clk',
 #                         feat_map_file=feat_map_file)
+    feature_eng(input_file=train_raw_path,
+                output_file=train_file_path + 'clk',
+                feat_map_file=feat_map_file,
+                feat_map=feat_map,
+                feat_map_index_max=feat_map_index_max)
 #     feature_engineering(input_file=test_raw_path,
 #                         output_file=test_file_path + 'clk',
 #                         feat_map_file=feat_map_file)
-#     trainTest(configuration='configuration_clk')
+    feature_eng(input_file=test_raw_path,
+                output_file=test_file_path + 'clk',
+                feat_map_file=feat_map_file,
+                feat_map=feat_map,
+                feat_map_index_max=feat_map_index_max)
+    # trainTest(configuration='configuration_clk')
 #
 #     # traing buy
 #     splitData(data_file_path=output_file_buy,
